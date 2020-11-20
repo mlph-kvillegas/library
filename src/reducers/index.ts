@@ -1,8 +1,10 @@
-import { combineReducers } from "redux"; 
+import { combineReducers, createStore } from "redux"; 
 import { bookReducer } from "./bookReducer";
 
 const rootReducer = combineReducers({
-    books: bookReducer
+    bookList: bookReducer
 })
 
-export default rootReducer
+export type RootState = ReturnType<typeof rootReducer>
+
+export const store = createStore(rootReducer);
