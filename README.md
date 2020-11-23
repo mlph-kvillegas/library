@@ -1,5 +1,6 @@
-> ## Test React Project
-> ### (ReactJS x TypeScript x Bootstrtap x Redux x Hooks)
+ ### Test React Project
+ 
+ ### (ReactJS x TypeScript x Bootstrtap x Redux x Hooks)
 
 - [x] Redux x TypeScript
   - [x] Watch tutorials for redux
