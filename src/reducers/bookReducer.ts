@@ -11,6 +11,7 @@ const initialState: BookList = {
 export function bookReducer(state = initialState, action: BookActionTypes) : BookList {
     switch(action.type) {
         case ADD_BOOK:
+            action.payload.id = state.books[state.books.length-1].id + 1;
             return {
                 books: [...state.books, action.payload]
             }
