@@ -9,11 +9,9 @@
   - [ ] Not sure what to use (redux-thunk vs redux-saga)
   - [ ] Project setup for middleware
  
- Note: No middle used on current project setup. Was able to use redux on components so far without middleware
+   Note: No middle used on current project setup. Was able to use redux on components so far without middleware
  
 - [ ] Component x Redux x Hooks x Bootstrap
-
-Note: Hooks used: useSelector, useDispatch, useState
 
   - [x] 1 component for now
   - [x] Delete
@@ -21,6 +19,9 @@ Note: Hooks used: useSelector, useDispatch, useState
   - [x] Update
   - [ ] Search
   - [ ] Validation
+  
+  Note: Hooks used: useSelector, useDispatch, useState
+  
 - [ ] Fix Component x Container layer
   - [ ] Delete
   - [ ] Create
