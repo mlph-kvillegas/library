@@ -3,24 +3,32 @@ import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { RootState } from './reducers';
-import { deleteBook, addBook } from './actions/bookActions';
+import { deleteBook, addBook, editBook } from './actions/bookActions';
 import { Book } from './entities/book';
 
 function App() {
 
   const listOfBooks = useSelector( (state:RootState) => state.bookList.books);
   const dispatch = useDispatch();
-  const [newBook, setNewBook] = useState({} as Book)
+  const [newBook, setBook] = useState({} as Book)
+  const [isUpdate, setIsUpdate] = useState(false)
 
-  const createNewBook = (event: React.FormEvent) => {
+  const submitBook = (event: React.FormEvent) => {
     event.preventDefault(); // remove reloading of page when button is clicked
-    dispatch(addBook(newBook))
-    setNewBook({} as Book)
+
+    isUpdate ? dispatch(editBook(newBook)) : dispatch(addBook(newBook))
+    setBook({} as Book)
+    setIsUpdate(false)
+  }
+
+  const updateBook = (book: Book) => {
+    setIsUpdate(true)
+    setBook(book)
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
-    setNewBook({
+    setBook({
       ...newBook,
       [name] : value
     })
@@ -44,6 +52,7 @@ function App() {
             {
               listOfBooks.map((book) => {
                return <li key={`${book.id}-item`}> {`${book.id} - ${book.title} - ${book.author} - ${book.yearPublished}`} 
+                <Button key={`${book.id}-edit-button`} onClick={() => updateBook(book)} > Update</Button>
                 <Button key={`${book.id}-delete-button`} onClick={() => dispatch(deleteBook(book.id))}> Delete</Button></li>
               })
             }
@@ -51,8 +60,9 @@ function App() {
         </Col>
         <Col>
           <div className="addBook">
-            <h1 className="text-center"> Add Book </h1>
-              <Form onSubmit={createNewBook}>
+            <h1 className="text-center"> {isUpdate ? 'Update' : 'Create'} Book </h1>
+              <Form onSubmit={submitBook}>
+              <Form.Control type="hidden" name="id" value={newBook.id || ''}/>
                 <Form.Group>
                   <Form.Label> Title </Form.Label>
                   <Form.Control type="text" name="title" value={newBook.title || ''} onChange={handleInputChange}/>
